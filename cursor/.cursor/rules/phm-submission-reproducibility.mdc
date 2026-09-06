@@ -1,0 +1,42 @@
+---
+description: Final training, reproducibility, prediction, and submission rules for the PHM 2025 engine challenge. Apply when retraining selected models, saving artifacts, generating test predictions, or creating submission.csv.
+alwaysApply: false
+---
+
+# Finalization and submission
+
+Before final training freeze:
+- feature definitions,
+- hyperparameters,
+- target-specific quantiles,
+- calibration parameters,
+- ensemble weights.
+
+Retrain using all permitted training data.
+
+The final submission must contain exactly:
+
+```text
+file
+Cycles_to_HPT_SV
+Cycles_to_HPC_SV
+Cycles_to_WW
+```
+
+Validate:
+- exact row count,
+- exact row order,
+- exact column names,
+- no NaNs,
+- no infinities,
+- no duplicate identifiers,
+- no impossible negative cycle predictions.
+
+Save enough metadata to reproduce predictions deterministically:
+- random seed,
+- package versions,
+- feature list,
+- fold definitions,
+- model parameters,
+- calibration,
+- ensemble weights.

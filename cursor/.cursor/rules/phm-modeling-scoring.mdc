@@ -1,0 +1,44 @@
+---
+description: Modeling, scoring, calibration, and ensembling rules for the PHM 2025 challenge. Apply when training LightGBM, CatBoost, XGBoost, quantile models, tuning hyperparameters, evaluating predictions, calibrating bias, or building ensembles.
+alwaysApply: false
+---
+
+# Modeling and scoring
+
+Start with separate models for:
+- WW,
+- HPC shop visit,
+- HPT shop visit.
+
+Primary model family:
+1. LightGBM,
+2. CatBoost,
+3. XGBoost if useful.
+
+Rank models by the official PHM challenge score, not MAE alone.
+
+Also track:
+- MAE,
+- RMSE,
+- mean signed error,
+- late prediction rate,
+- early prediction rate.
+
+Because late predictions are penalized more heavily, test quantiles:
+
+```text
+0.30
+0.35
+0.40
+0.45
+0.50
+```
+
+Select quantiles independently by target.
+
+Use out-of-fold predictions for:
+- additive calibration,
+- multiplicative calibration,
+- ensemble weighting.
+
+Do not use arbitrary ensemble weights.

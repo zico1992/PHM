@@ -1,0 +1,16 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Local environments
+pm_venv/
+.venv/
+venv/
+
+# Tooling
+.ipynb_checkpoints/
+
+# Cached feature matrices (regenerate with python -m src.predict)
+data/processed/*.pkl

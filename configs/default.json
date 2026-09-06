@@ -1,0 +1,7 @@
+{
+  "seed": 42,
+  "window_points": 151,
+  "window_step": 3,
+  "quantiles": [0.3, 0.35, 0.4, 0.45, 0.5],
+  "primary_model": "lightgbm_quantile"
+}

@@ -1,0 +1,24 @@
+---
+description: Leakage prevention and temporal validation rules for the PHM 2025 engine challenge. Apply when creating features, train/validation splits, rolling windows, normalization, or maintenance-history variables.
+alwaysApply: false
+---
+
+# Leakage and validation rules
+
+For a prediction at cycle `t`, use only information with `cycle <= t`.
+
+Never:
+- use shuffled `train_test_split` as final evaluation,
+- use centered rolling windows,
+- normalize an engine using its complete future history,
+- construct features from future maintenance events,
+- fit preprocessing on validation or test data.
+
+Use:
+1. engine holdout,
+2. forward temporal holdout,
+3. rolling-origin validation.
+
+Reuse identical stored folds across model comparisons.
+
+Any maintenance metadata with uncertain timing semantics must be excluded until justified.

@@ -1,0 +1,35 @@
+---
+description: Temporal degradation and maintenance feature engineering for the PHM 2025 engine challenge. Apply when implementing lags, rolling statistics, trends, snapshot features, baselines, health indices, or maintenance-history features.
+alwaysApply: false
+---
+
+# Feature engineering
+
+For eligible sensors, consider:
+
+```text
+current value
+lag 1/2/5/10/25/50
+rolling mean/std/min/max/range
+rolling slope
+EWMA
+first difference
+delta from engine baseline
+relative delta from baseline
+```
+
+Candidate rolling windows: `5, 10, 25, 50, 100`.
+
+If snapshots represent stable operating conditions:
+- preserve snapshot-specific values,
+- pivot sensors by snapshot,
+- compute cross-snapshot deltas,
+- compute phase-specific trends.
+
+If point-in-time valid, include:
+- cycles since last WW,
+- cycles since last HPC shop visit,
+- cycles since last HPT shop visit,
+- prior maintenance counts.
+
+Fit PCA, health indices, scalers, and all learned transforms using training data only.

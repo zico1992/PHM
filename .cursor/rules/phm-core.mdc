@@ -1,0 +1,31 @@
+---
+description: Core PHM 2025 predictive-maintenance project rules. Apply when working on the engine maintenance challenge, target definitions, overall workflow, or project architecture.
+alwaysApply: false
+---
+
+# PHM core
+
+Predict:
+- `Cycles_to_HPT_SV`
+- `Cycles_to_HPC_SV`
+- `Cycles_to_WW`
+
+Treat the problem as longitudinal time-to-maintenance prediction.
+
+Required execution order:
+
+```text
+profile data
+→ audit leakage
+→ implement official scorer
+→ define temporal validation
+→ establish baselines
+→ engineer features
+→ train target-specific models
+→ calibrate
+→ ensemble
+→ generate submission
+```
+
+Do not jump directly to deep learning.
+Prefer simple, reproducible models when validation performance is similar.

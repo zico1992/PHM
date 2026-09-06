@@ -1,0 +1,17 @@
+engine,fold,role
+101,0,valid
+102,0,train
+103,0,train
+104,0,train
+101,1,train
+102,1,valid
+103,1,train
+104,1,train
+101,2,train
+102,2,train
+103,2,valid
+104,2,train
+101,3,train
+102,3,train
+103,3,train
+104,3,valid

@@ -1,0 +1,11 @@
+feature,family,available_at_t,leakage_risk,decision,reason
+snapshot_pivoted_sensors,sensor,True,low,keep,Current-cycle snapshot values only.
+trailing_rolling_stats,temporal,True,low,keep,Right-aligned windows using cycle <= t within the observed window.
+window_early_baseline_delta,degradation,True,low,keep,"Baseline uses only the first cycles of the current window, not future history."
+centered_rolling,temporal,False,high,exclude,Uses future cycles.
+full_engine_normalization,preprocessing,False,high,exclude,Would use complete future history of an engine.
+Cycles_Since_New_absolute,meta,False,high,exclude,Test/val files reset Cycles to a 0-1500 window; absolute age is not observed.
+Cumulative_WWs_HPC_HPT,maintenance_meta,False,high,exclude,Timing semantics are uncertain and columns are absent from test/val.
+Sensed_P25_T5,sensor,False,medium,exclude,Optional sensors are not present in the provided test/val files.
+target_derived_features,label,False,high,exclude,Would leak remaining-cycle labels.
+op_condition_residual_model,health_index,True,low,keep,Linear residual model fitted on training early-life rows only.
