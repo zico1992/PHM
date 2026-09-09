@@ -1,0 +1,61 @@
+{
+  "feature_cols": [
+    "resid_Sensed_T45_s4",
+    "resid_Sensed_T45_s7",
+    "resid_Sensed_Core_Speed_s8",
+    "resid_Sensed_Core_Speed_s2",
+    "Sensed_T25_s2_dlt",
+    "Sensed_Core_Speed_s8_dlt",
+    "Sensed_T45_s1_slope",
+    "Sensed_T45_s1_dlt",
+    "Sensed_Core_Speed_s2_slope",
+    "Sensed_T3_s6_dlt",
+    "resid_Sensed_T3_s6",
+    "Sensed_T45_s4_dlt",
+    "Sensed_Ps3_s4_dlt",
+    "resid_Sensed_Ps3_s4"
+  ],
+  "proba_threshold": 0.03,
+  "scale_factor": 0.55,
+  "post_offset": 89.57226195241424,
+  "short_rul_threshold": 500.0,
+  "oof_score": 30.22105048192802,
+  "fold_configs": [
+    {
+      "held_engine": 101,
+      "proba_threshold": 0.03,
+      "scale_factor": 0.55,
+      "post_offset": -45.99635688283627,
+      "short_rul_threshold": 500.0,
+      "oof_score": 30.715189623472305
+    },
+    {
+      "held_engine": 102,
+      "proba_threshold": 0.03,
+      "scale_factor": 0.6,
+      "post_offset": 108.67335249295928,
+      "short_rul_threshold": 500.0,
+      "oof_score": 31.213586367026185
+    },
+    {
+      "held_engine": 103,
+      "proba_threshold": 0.03,
+      "scale_factor": 0.45,
+      "post_offset": 117.20950821941331,
+      "short_rul_threshold": 500.0,
+      "oof_score": 30.97479850048564
+    },
+    {
+      "held_engine": 104,
+      "proba_threshold": 0.03,
+      "scale_factor": 0.65,
+      "post_offset": 63.69016893731725,
+      "short_rul_threshold": 500.0,
+      "oof_score": 27.084882732979814
+    }
+  ],
+  "pre_gate_score": 25.66984107667894,
+  "pre_gate_score_HPC": 35.17846928568699,
+  "post_gate_score": 24.560832753496186,
+  "post_gate_score_HPC": 31.851444316138704
+}

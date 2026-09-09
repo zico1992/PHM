@@ -153,6 +153,23 @@ def window_feature_row(wide: pd.DataFrame) -> dict[str, float]:
             feats["cycles_since_t45_drop"] = float(n - 1)
     else:
         feats["cycles_since_t45_drop"] = np.nan
+
+    # Event-proximity / degradation-spike composites (causal within-window).
+    t45_dlt = feats.get("Sensed_T45_s4_dlt", np.nan)
+    t45_slope = feats.get("Sensed_T45_s4_slope", np.nan)
+    core_dlt = feats.get("Sensed_Core_Speed_s8_dlt", np.nan)
+    t25_dlt = feats.get("Sensed_T25_s2_dlt", np.nan)
+    feats["degrade_t45_heat_rise"] = float(t45_dlt) if np.isfinite(t45_dlt) else np.nan
+    feats["degrade_t45_slope"] = float(t45_slope) if np.isfinite(t45_slope) else np.nan
+    feats["degrade_core_drop"] = float(-core_dlt) if np.isfinite(core_dlt) else np.nan
+    feats["degrade_t25_drop"] = float(-t25_dlt) if np.isfinite(t25_dlt) else np.nan
+    spike_parts = [
+        feats["degrade_t45_heat_rise"],
+        feats["degrade_core_drop"],
+        feats["degrade_t25_drop"],
+    ]
+    finite = [v for v in spike_parts if np.isfinite(v)]
+    feats["degrade_spike_score"] = float(np.mean(finite)) if finite else np.nan
     return feats
 
 
@@ -161,6 +178,9 @@ def extract_window_sample(window_df: pd.DataFrame, residual_model: ResidualModel
     feats = window_feature_row(wide)
     if residual_model is not None and residual_model.fitted:
         feats.update(residual_model.residuals_last_row(window_df))
+        resid_t45 = [feats.get(f"resid_Sensed_T45_s{s}", np.nan) for s in (1, 4, 7)]
+        finite = [v for v in resid_t45 if np.isfinite(v)]
+        feats["degrade_resid_t45_mean"] = float(np.mean(finite)) if finite else np.nan
     return feats
 
 

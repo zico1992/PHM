@@ -705,21 +705,131 @@
     "resid_Sensed_Ps3_s7",
     "resid_Sensed_Ps3_s8"
   ],
-  "selected": {
+  "selected_lightgbm": {
     "Cycles_to_HPT_SV": {
+      "family": "lightgbm",
       "quantile": 0.3,
       "offset": -243.97534833649266,
       "oof_quantile_score": 30.808930591693564
     },
     "Cycles_to_HPC_SV": {
-      "quantile": 0.3,
-      "offset": -559.8266372025895,
-      "oof_quantile_score": 48.75348093284765
+      "family": "lightgbm",
+      "quantile": 0.15,
+      "offset": -358.2890478096573,
+      "oof_quantile_score": 39.00650399487051
     },
     "Cycles_to_WW": {
+      "family": "lightgbm",
       "quantile": 0.3,
       "offset": -72.55481035276394,
       "oof_quantile_score": 21.785466770157495
+    }
+  },
+  "selected_catboost": {
+    "Cycles_to_HPT_SV": {
+      "family": "catboost",
+      "quantile": 0.3,
+      "offset": -243.97534833649266,
+      "oof_quantile_score": 28.84975642689753
+    },
+    "Cycles_to_HPC_SV": {
+      "family": "catboost",
+      "quantile": 0.15,
+      "offset": -246.32372036913944,
+      "oof_quantile_score": 37.576868839060715
+    },
+    "Cycles_to_WW": {
+      "family": "catboost",
+      "quantile": 0.3,
+      "offset": -69.65261793865338,
+      "oof_quantile_score": 21.172415331037413
+    }
+  },
+  "ensemble": {
+    "Cycles_to_HPT_SV": {
+      "lgb_quantile": 0.3,
+      "cb_quantile": 0.3,
+      "lgb_weight": 0.0,
+      "cb_weight": 1.0,
+      "offset": -243.97534833649266,
+      "oof_score": 22.274752871254826
+    },
+    "Cycles_to_HPC_SV": {
+      "lgb_quantile": 0.3,
+      "cb_quantile": 0.35,
+      "lgb_weight": 1.0,
+      "cb_weight": 0.0,
+      "offset": -559.8266372025895,
+      "oof_score": 31.851444316138704,
+      "hpc_gate": {
+        "feature_cols": [
+          "resid_Sensed_T45_s4",
+          "resid_Sensed_T45_s7",
+          "resid_Sensed_Core_Speed_s8",
+          "resid_Sensed_Core_Speed_s2",
+          "Sensed_T25_s2_dlt",
+          "Sensed_Core_Speed_s8_dlt",
+          "Sensed_T45_s1_slope",
+          "Sensed_T45_s1_dlt",
+          "Sensed_Core_Speed_s2_slope",
+          "Sensed_T3_s6_dlt",
+          "resid_Sensed_T3_s6",
+          "Sensed_T45_s4_dlt",
+          "Sensed_Ps3_s4_dlt",
+          "resid_Sensed_Ps3_s4"
+        ],
+        "proba_threshold": 0.03,
+        "scale_factor": 0.55,
+        "post_offset": 89.57226195241424,
+        "short_rul_threshold": 500.0,
+        "oof_score": 30.22105048192802,
+        "fold_configs": [
+          {
+            "held_engine": 101,
+            "proba_threshold": 0.03,
+            "scale_factor": 0.55,
+            "post_offset": -45.99635688283627,
+            "short_rul_threshold": 500.0,
+            "oof_score": 30.715189623472305
+          },
+          {
+            "held_engine": 102,
+            "proba_threshold": 0.03,
+            "scale_factor": 0.6,
+            "post_offset": 108.67335249295928,
+            "short_rul_threshold": 500.0,
+            "oof_score": 31.213586367026185
+          },
+          {
+            "held_engine": 103,
+            "proba_threshold": 0.03,
+            "scale_factor": 0.45,
+            "post_offset": 117.20950821941331,
+            "short_rul_threshold": 500.0,
+            "oof_score": 30.97479850048564
+          },
+          {
+            "held_engine": 104,
+            "proba_threshold": 0.03,
+            "scale_factor": 0.65,
+            "post_offset": 63.69016893731725,
+            "short_rul_threshold": 500.0,
+            "oof_score": 27.084882732979814
+          }
+        ],
+        "pre_gate_score": 25.66984107667894,
+        "pre_gate_score_HPC": 35.17846928568699,
+        "post_gate_score": 24.560832753496186,
+        "post_gate_score_HPC": 31.851444316138704
+      }
+    },
+    "Cycles_to_WW": {
+      "lgb_quantile": 0.3,
+      "cb_quantile": 0.3,
+      "lgb_weight": 0.2,
+      "cb_weight": 0.8,
+      "offset": -69.65261793865338,
+      "oof_score": 19.556301073095018
     }
   },
   "lgbm": {
@@ -727,11 +837,64 @@
     "learning_rate": 0.05,
     "num_leaves": 31
   },
+  "catboost": {
+    "iterations": 250,
+    "learning_rate": 0.05,
+    "depth": 6
+  },
   "packages": {
     "pandas": "3.0.5",
     "numpy": "2.5.2",
-    "lightgbm": "4.7.0"
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10"
   },
-  "oof_score": 26.44031590768772,
-  "baseline_score": 117.15171608235171
+  "oof_score": 24.560832753496186,
+  "baseline_score": 117.15171608235171,
+  "lightgbm_oof_score": 26.70778448034385,
+  "catboost_oof_score": 26.028423157102043,
+  "hpc_gate": {
+    "feature_cols": [
+      "resid_Sensed_T45_s4",
+      "resid_Sensed_T45_s7",
+      "resid_Sensed_Core_Speed_s8",
+      "resid_Sensed_Core_Speed_s2",
+      "Sensed_T25_s2_dlt",
+      "Sensed_Core_Speed_s8_dlt",
+      "Sensed_T45_s1_slope",
+      "Sensed_T45_s1_dlt",
+      "Sensed_Core_Speed_s2_slope",
+      "Sensed_T3_s6_dlt",
+      "resid_Sensed_T3_s6",
+      "Sensed_T45_s4_dlt",
+      "Sensed_Ps3_s4_dlt",
+      "resid_Sensed_Ps3_s4"
+    ],
+    "proba_threshold": 0.03,
+    "scale_factor": 0.55,
+    "post_offset": 89.57226195241424,
+    "short_rul_threshold": 500.0,
+    "oof_score": 30.22105048192802
+  },
+  "oof_score_pre_gate": 25.66984107667894,
+  "quantiles": {
+    "hpc": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ],
+    "other": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ]
+  },
+  "hpc_strategy": "q030_ensemble_plus_scale_gate",
+  "note": "Low quantiles 0.15-0.25 trained but not selected; did not beat gated q0.30."
 }
